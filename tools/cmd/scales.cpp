@@ -4,12 +4,9 @@
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
-#include "stdafx.h"
+#include "common.hpp"
 
 #include <posit>
-
-using namespace std;
-using namespace sw::unum;
 
 // DEPRECATED
 constexpr unsigned int MAX_ES = 5;
@@ -19,7 +16,7 @@ uint64_t GENERATED_SCALE_FACTORS[MAX_ES][MAX_K];
 void generateScaleFactorLookupTable() {
 	uint64_t useed, useed_power_k;
 	for (int es = 0; es < MAX_ES; es++) {
-		useed = two_to_the_power(two_to_the_power(es));
+		useed = sw::unum::two_to_the_power(sw::unum::two_to_the_power(es));
 		useed_power_k = useed; 
 		GENERATED_SCALE_FACTORS[es][0] = 1; // for k = 0
 		for (int k = 1; k < MAX_K; k++) {
@@ -30,6 +27,7 @@ void generateScaleFactorLookupTable() {
 }
 
 void printScaleFactors(uint64_t scale_factors[MAX_ES][MAX_K]) {
+	using namespace std;
 	cout << "      ";
 	for (int k = 0; k < MAX_K; k++) {
 		cout << "     k = " << k << "   ";
@@ -48,7 +46,7 @@ void printScaleFactors(uint64_t scale_factors[MAX_ES][MAX_K]) {
 template<typename Ty>
 std::string range_to_string(std::string tag) {
 	std::stringstream ss;
-	ss << setw(13) << tag;
+	ss << std::setw(13) << tag;
 	ss << "                       ";
 	ss << "minpos scale " << std::setw(10) << std::numeric_limits<Ty>::min_exponent << "     ";
 	ss << "maxpos scale " << std::setw(10) << std::numeric_limits<Ty>::max_exponent << "     ";
@@ -62,6 +60,9 @@ std::string range_to_string(std::string tag) {
 // maxpos = useed^(nbits-2)
 // minpos = useed^(2-nbits)
 void ReportPositScales() {
+	using namespace std;
+	using namespace sw::unum;
+
 	posit<3, 0> p3_0;
 	posit<4, 0> p4_0;
 	posit<4, 1> p4_1;
@@ -261,6 +262,9 @@ void ReportPositScales() {
 
 int main(int argc, char** argv)
 try {
+	using namespace std;
+	using namespace sw::unum;
+
 	bool bReportIndividualTestCases = false;
 	int nrOfFailedTestCases = 0;
 
@@ -290,11 +294,11 @@ try {
 	return (nrOfFailedTestCases > 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 }
 catch (char const* msg) {
-	cerr << msg << endl;
+	std::cerr << msg << std::endl;
 	return EXIT_FAILURE;
 }
 catch (...) {
-	cerr << "Caught unknown exception" << endl;
+	std::cerr << "Caught unknown exception" << std::endl;
 	return EXIT_FAILURE;
 }
 

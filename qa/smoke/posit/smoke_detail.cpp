@@ -4,16 +4,14 @@
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
-#include "stdafx.h"
+#include "common.hpp"
 
 #define POSIT_VERBOSE_OUTPUT
 #define POSIT_TRACE_ALL
 
 #include <posit>
-#include "../posit_test_helpers.hpp"
+#include "../../posit_test_helpers.hpp"
 #include "qa_helpers.hpp"
-
-using namespace std;
 
 /*
 smoke tests focus on the boundary cases of posit arithmetic.
@@ -24,6 +22,8 @@ and show all the intermediate pipeline processing details.
 
 int main(int argc, char** argv)
 try {
+	using namespace std;
+
 	cout << "Generating smoke test details" << endl;
 
 	bool bReportIndividualTestCases = true;
@@ -101,10 +101,10 @@ try {
 	return (nrOfFailedTestCases > 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 }
 catch (char const* msg) {
-	cerr << msg << endl;
+	std::cerr << msg << std::endl;
 	return EXIT_FAILURE;
 }
 catch (...) {
-	cerr << "Caught unknown exception" << endl;
+	std::cerr << "Caught unknown exception" << std::endl;
 	return EXIT_FAILURE;
 }

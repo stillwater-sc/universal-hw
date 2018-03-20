@@ -95,16 +95,16 @@ namespace sw {
 		}
 
 		template<size_t nbits, size_t es>
-		void ReportBinaryArithmeticSuccess(std::string test_case, std::string op, const posit<nbits, es>& lhs, const posit<nbits, es>& rhs, const posit<nbits, es>& pref, const posit<nbits, es>& presult) {
-			std::cerr << test_case << " "
+		void GenerateBinaryArithmeticTestCase(std::string op, const posit<nbits, es>& lhs, const posit<nbits, es>& rhs, const posit<nbits, es>& presult) {
+			std::cerr << lhs.get() << " "
+				<< rhs.get() << " "
+				<< presult.get() << " | "
 				<< std::setprecision(20)
-				<< std::setw(FLOAT_TABLE_WIDTH) << lhs
+				<< std::setw(FLOAT_TABLE_WIDTH) << lhs 
 				<< " " << op << " "
-				<< std::setw(FLOAT_TABLE_WIDTH) << rhs
+				<< std::setw(FLOAT_TABLE_WIDTH) << rhs 
 				<< " == "
-				<< std::setw(FLOAT_TABLE_WIDTH) << presult << " reference value is "
-				<< std::setw(FLOAT_TABLE_WIDTH) << pref
-				<< " " << pref.get() << " vs " << presult.get() 
+				<< std::setw(FLOAT_TABLE_WIDTH) << presult 
 				<< std::setprecision(5)
 				<< std::endl;
 		}
@@ -424,6 +424,8 @@ namespace sw {
 			int nrOfFailedTests = 0;
 			posit<nbits, es> pa, pb, psum, pref;
 
+			std::cout << nbits << " " << es << std::endl;
+
 			double da, db;
 			for (int i = 0; i < NR_POSITS; i++) {
 				pa.set_raw_bits(i);
@@ -438,7 +440,7 @@ namespace sw {
 						if (bReportIndividualTestCases)	ReportBinaryArithmeticError("FAIL", "+", pa, pb, pref, psum);
 					}
 					else {
-						//if (bReportIndividualTestCases) ReportBinaryArithmeticSuccess("PASS", "+", pa, pb, pref, psum);
+						GenerateBinaryArithmeticTestCase("+", pa, pb, psum);
 					}
 				}
 			}
@@ -467,7 +469,7 @@ namespace sw {
 						if (bReportIndividualTestCases)	ReportBinaryArithmeticError("FAIL", "-", pa, pb, pref, pdif);
 					}
 					else {
-						//if (bReportIndividualTestCases) ReportBinaryArithmeticSuccess("PASS", "-", pa, pb, pref, pdif);
+						GenerateBinaryArithmeticTestCase("-", pa, pb, pdif);
 					}
 				}
 			}
@@ -496,7 +498,7 @@ namespace sw {
 						nrOfFailedTests++;
 					}
 					else {
-						//if (bReportIndividualTestCases) ReportBinaryArithmeticSuccess("PASS", "*", pa, pb, pref, pmul);
+						GenerateBinaryArithmeticTestCase("*", pa, pb, pmul);
 					}
 				}
 			}
@@ -528,7 +530,7 @@ namespace sw {
 					if (bReportIndividualTestCases)	ReportUnaryArithmeticError("FAIL", "reciprocate", pa, preference, preciprocal);
 				}
 				else {
-					//if (bReportIndividualTestCases) ReportUnaryArithmeticSuccess("PASS", "reciprocate", pa, preference, preciprocal);
+					GenerateBinaryArithmeticTestCase("reciprocate", pa, pb, preciprocal);
 				}
 			}
 			return nrOfFailedTests;
@@ -561,7 +563,7 @@ namespace sw {
 						nrOfFailedTests++;
 					}
 					else {
-						//if (bReportIndividualTestCases) ReportBinaryArithmeticSuccess("PASS", "/", pa, pb, pref, pdiv);
+						GenerateBinaryArithmeticTestCase("/", pa, pb, pdiv);
 					}
 				}
 			}

@@ -33,7 +33,7 @@ void GenerateTestCase(Ty a, Ty b) {
 	std::cout << std::setprecision(5);
 }
 
-#define MANUAL_TESTING 0
+#define MANUAL_TESTING 1
 #define STRESS_TESTING 0
 
 int main(int argc, char** argv)
@@ -48,18 +48,16 @@ try {
 
 #if MANUAL_TESTING
 	// generate individual testcases to hand trace/debug
-	GenerateTestCase<6, 3, double>(INFINITY, INFINITY);
-	GenerateTestCase<8, 4, float>(0.5f, -0.5f);
-	GenerateTestCase<3, 0>(0.5f, 1.0f);
+	//GenerateTestCase<6, 3, double>(INFINITY, INFINITY);
+	//GenerateTestCase<8, 4, float>(0.5f, -0.5f);
+	//GenerateTestCase<3, 0, float>(0.5f, 1.0f);
 
 	// manual exhaustive test
-	nrOfFailedTestCases += ReportTestResult(ValidateAddition<3, 0>("Manual Testing", true), "posit<3,0>", "addition");
-	nrOfFailedTestCases += ReportTestResult(ValidateAddition<3, 1>("Manual Testing", true), "posit<3,1>", "addition");
 	nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 0>("Manual Testing", true), "posit<5,0>", "addition");
-	nrOfFailedTestCases += ReportTestResult(ValidateAddition<8, 4>("Manual Testing", true), "posit<8,4>", "addition");
-
-	nrOfFailedTestCases += ReportTestResult(ValidateThroughRandoms<16, 1>(tag, true, OPCODE_ADD, 1000), "posit<16,1>", "addition");
-//	nrOfFailedTestCases += ReportTestResult(ValidateThroughRandoms<64, 2>(tag, true, OPCODE_ADD, 1000), "posit<64,2>", "addition");
+	nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 1>("Manual Testing", true), "posit<5,1>", "addition");
+	nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 2>("Manual Testing", true), "posit<5,2>", "addition");
+	//nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 3>("Manual Testing", true), "posit<5,3>", "addition");
+	//nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 4>("Manual Testing", true), "posit<5,4>", "addition");
 
 #else
 

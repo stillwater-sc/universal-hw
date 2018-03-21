@@ -530,7 +530,7 @@ namespace sw {
 					if (bReportIndividualTestCases)	ReportUnaryArithmeticError("FAIL", "reciprocate", pa, preference, preciprocal);
 				}
 				else {
-					GenerateBinaryArithmeticTestCase("reciprocate", pa, pb, preciprocal);
+					GenerateUnaryArithmeticTestCase("reciprocate", pa, preciprocal);
 				}
 			}
 			return nrOfFailedTests;

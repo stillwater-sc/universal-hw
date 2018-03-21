@@ -20,7 +20,7 @@
 template<size_t nbits, size_t es, typename Ty>
 void GenerateTestCase(Ty a, Ty b) {
 	Ty ref;
-	posit<nbits, es> pa, pb, pref, psum;
+	sw::unum::posit<nbits, es> pa, pb, pref, psum;
 	pa = a;
 	pb = b;
 	ref = a + b;

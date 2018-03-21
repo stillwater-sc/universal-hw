@@ -39,12 +39,12 @@ void GenerateTestCase(Ty a, Ty b) {
 int main(int argc, char** argv)
 try {
 	using namespace std;
-	using namespace sw::unum;
+	using namespace sw::qa;
 
 	bool bReportIndividualTestCases = false;
 	int nrOfFailedTestCases = 0;
 
-	std::string tag = "Addition failed: ";
+	std::string tag = "Addition Validation : ";
 
 #if MANUAL_TESTING
 	// generate individual testcases to hand trace/debug
@@ -53,11 +53,9 @@ try {
 	//GenerateTestCase<3, 0, float>(0.5f, 1.0f);
 
 	// manual exhaustive test
-	nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 0>("Manual Testing", true), "posit<5,0>", "addition");
-	nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 1>("Manual Testing", true), "posit<5,1>", "addition");
-	nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 2>("Manual Testing", true), "posit<5,2>", "addition");
-	//nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 3>("Manual Testing", true), "posit<5,3>", "addition");
-	//nrOfFailedTestCases += ReportTestResult(ValidateAddition<5, 4>("Manual Testing", true), "posit<5,4>", "addition");
+	GenerateValidationTestSet<5, 0>("addition");
+	GenerateValidationTestSet<5, 1>("addition");
+	GenerateValidationTestSet<5, 2>("addition");
 
 #else
 

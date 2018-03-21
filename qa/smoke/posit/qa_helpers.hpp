@@ -289,7 +289,6 @@ namespace sw {
 		}
 
 
-
 		template<size_t nbits, size_t es>
 		int Compare(double input, const sw::unum::posit<nbits, es>& presult, double reference, bool bReportIndividualTestCases) {
 			int fail = 0;
@@ -307,7 +306,6 @@ namespace sw {
 
 			return fail;
 		}
-
 
 		template<size_t nbits, size_t es>
 		int SmokeTestConversion(std::string tag, bool bReportIndividualTestCases) {
@@ -623,7 +621,7 @@ namespace sw {
 					sw::qa::execute<nbits,es,double>(opcode, qa, qb, pref, pa, pb, presult);
 					if (presult != pref) {
 						nrOfFailedTests++;
-						ReportBinaryArithmeticErrorInBinary("FAIL", operation_string, pa, pb, pref, presult);
+						ReportBinaryArithmeticError("FAIL", operation_string, pa, pb, pref, presult);
 					}
 					else {
 						//if (bReportIndividualTestCases) ReportBinaryArithmeticSuccess("PASS", operation_string, pa, pb, preference, presult);
@@ -675,7 +673,7 @@ namespace sw {
 					sw::qa::execute<nbits,es,double>(opcode, da, db, pref, pa, pb, presult);
 					if (presult != pref) {
 						nrOfFailedTests++;
-						ReportBinaryArithmeticErrorInBinary("FAIL", operation_string, pa, pb, pref, presult);
+						ReportBinaryArithmeticError("FAIL", operation_string, pa, pb, pref, presult);
 					}
 					else {
 						//if (bReportIndividualTestCases) ReportBinaryArithmeticSuccess("PASS", operation_string, pa, pb, preference, presult);
@@ -686,6 +684,6 @@ namespace sw {
 			return nrOfFailedTests;
 		}
 
-
 	}; // namespace qa
+
 };  // namespace sw

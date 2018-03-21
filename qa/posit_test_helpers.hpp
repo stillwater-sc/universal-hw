@@ -107,6 +107,7 @@ namespace sw {
 
 		/////////////////////////////// VALIDATION TEST SUITES ////////////////////////////////
 
+#if 0
 		template<size_t nbits, size_t es>
 		int Compare(double input, const posit<nbits, es>& presult, double reference, bool bReportIndividualTestCases) {
 			int fail = 0;
@@ -120,6 +121,7 @@ namespace sw {
 			}
 			return fail;
 		}
+#endif
 
 		// enumerate all conversion cases for a posit configuration
 		template<size_t nbits, size_t es>
@@ -574,6 +576,7 @@ namespace sw {
 
 			//////////////////////////////////// RANDOMIZED TEST SUITE FOR BINARY OPERATORS ////////////////////////
 
+#if 0
 			// for testing posit configs that are > 14-15, we need a more efficient approach.
 			// One simple, brute force approach is to generate randoms.
 			// A more white box approach is to focus on the testcases 
@@ -687,6 +690,7 @@ namespace sw {
 
 				return nrOfFailedTests;
 			}
+#endif
 
 	}; // namespace qa
 

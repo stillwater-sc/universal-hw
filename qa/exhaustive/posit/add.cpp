@@ -8,7 +8,7 @@
 
 // when you define POSIT_VERBOSE_OUTPUT executing an ADD the code will print intermediate results
 //#define POSIT_VERBOSE_OUTPUT
-#define POSIT_TRACE_ADD
+//#define POSIT_TRACE_ADD
 
 // minimum set of include files to reflect source code dependencies
 #include <posit>
@@ -33,6 +33,20 @@ void GenerateTestCase(Ty a, Ty b) {
 	std::cout << std::setprecision(5);
 }
 
+template<size_t nbits, size_t es> 
+void GenerateAdderTestbenchTable() {
+	constexpr int NR_OF_POSITS = (int)1 << nbits;
+	sw::unum::posit<nbits, es> a, b, sum;
+	for (int i = 0; i < NR_OF_POSITS; ++i) {
+		a.set_raw_bits(i);
+		for (int j = 0; j < NR_OF_POSITS; ++j) {
+			b.set_raw_bits(j);
+			sum = a + b;
+			std::cout << "( \"" << a.get() << "\", \"" << b.get() << "\", \"" << sw::unum::quire_add(a, b).fraction() << "\", \"" << sum.get() << "\" )" << std::endl;
+		}
+	}
+}
+
 #define MANUAL_TESTING 1
 #define STRESS_TESTING 0
 
@@ -53,9 +67,11 @@ try {
 	//GenerateTestCase<3, 0, float>(0.5f, 1.0f);
 
 	// manual exhaustive test
-	GenerateValidationTestSet<5, 0>("addition");
-	GenerateValidationTestSet<5, 1>("addition");
-	GenerateValidationTestSet<5, 2>("addition");
+//	GenerateValidationTestSet<5, 0>("addition");
+//	GenerateValidationTestSet<5, 1>("addition");
+//	GenerateValidationTestSet<5, 2>("addition");
+
+	GenerateAdderTestbenchTable<7, 2>();
 
 #else
 

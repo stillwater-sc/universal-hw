@@ -293,7 +293,7 @@ namespace sw {
 		int Compare(double input, const sw::unum::posit<nbits, es>& presult, double reference, bool bReportIndividualTestCases) {
 			int fail = 0;
 			double result = double(presult);
-			if (fabs(result - reference) > 0.000000001) {
+			if (std::fabs(result - reference) > 0.000000001) {
 				fail++;
 				if (bReportIndividualTestCases)	ReportConversionError("FAIL", "=", input, reference, presult);
 			}
@@ -302,7 +302,7 @@ namespace sw {
 			// report test cases: input operand -> posit bit pattern
 			sw::unum::value<std::numeric_limits< double >::digits> vi(input), vr(reference);
 			std::cout.precision(std::numeric_limits< double >::max_digits10);
-			std::cout << input << ", " << sw::unum::to_binary(input) << ", " << components(vi) << "\n" << reference << ", " << sw::unum::to_binary(reference) << ", " << components(vr) << "," << presult.get() << std::endl;
+			std::cout << input << ", " << hexfloat << input << ", " << components(vi) << "\n" << reference << ", " << hexfloat << reference << ", " << components(vr) << "," << presult.get() << std::endl;
 
 			return fail;
 		}

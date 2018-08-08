@@ -28,10 +28,10 @@ try {
 
 	cout << "Generate posit configurations" << endl;
 
-	GeneratePositTable<2, 0>(cout);
+	//GeneratePositTable<2, 0>(cout);
 
 	GeneratePositTable<3, 0>(cout);
-	GeneratePositTable<3, 1>(cout);
+	//GeneratePositTable<3, 1>(cout);
 
 	GeneratePositTable<4, 0>(cout);		
 	GeneratePositTable<4, 1>(cout);

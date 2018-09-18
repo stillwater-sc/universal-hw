@@ -511,8 +511,8 @@ namespace sw {
 			switch (opcode) {
 			default:
 			case OPCODE_NOP:
-				preference.setToZero();
-				presult.setToZero();
+				preference.setzero();
+				presult.setzero();
 				return;
 			case OPCODE_ADD:
 				presult = pa + pb;
@@ -587,10 +587,10 @@ namespace sw {
 				operand_values[2] = (long double)presult;
 				presult--; presult--;
 				operand_values[3] = (long double)presult;
-				presult.setToNaR();
+				presult.setnar();
 				presult++;
 				operand_values[4] = (long double)presult;
-				presult.setToNaR();
+				presult.setnar();
 				presult++;
 				operand_values[5] = (long double)presult;
 				for (uint32_t i = 6; i < SIZE_STATE_SPACE; i++) {
@@ -640,10 +640,10 @@ namespace sw {
 				operand_values[2] = (long double)presult;
 				presult--; presult--;
 				operand_values[3] = (long double)presult;
-				presult.setToNaR();
+				presult.setnar();
 				presult++;
 				operand_values[4] = (long double)presult;
-				presult.setToNaR();
+				presult.setnar();
 				presult++;
 				operand_values[5] = (long double)presult;
 				for (uint32_t i = 6; i < SIZE_STATE_SPACE; i++) {

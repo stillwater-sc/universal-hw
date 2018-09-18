@@ -62,11 +62,11 @@ void GenerateTestPatternTable(std::ostream& ostr) {
 		_scale = sw::unum::convert_to_bitblock<5,int>(sw::unum::scale(a));
 		decode(a.get(), s, r, e, f);
 		ostr << "( \"" << a.get() << "\", ("
-			<< (a.iszero() ? "'1', " : "'0', ")
 			<< (a.isnar() ? "'1', " : "'0', ")
+			<< (a.iszero() ? "'1', " : "'0', ")
 			<< (s ? "'1', " : "'0', ")
-			<< "\"" << sw::unum::to_binary(_scale) << "\", "
-			<< "\"" << sw::unum::to_binary(f.get()) << "\") ),\n";
+			<< "\"" << sw::unum::to_bit_string(_scale, false) << "\", "
+			<< "\"" << sw::unum::to_bit_string(f.get(), false) << "\") ),\n";
 	}
 }
 

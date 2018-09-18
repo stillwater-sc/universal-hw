@@ -91,7 +91,7 @@ try {
 			else if (op == "/") {
 				presult = pa / pb;
 			}
-			cout << sw::unum::components_to_string(presult) << endl;
+			cout << sw::unum::components(presult) << endl;
 			cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 			cout << endl;
 		}

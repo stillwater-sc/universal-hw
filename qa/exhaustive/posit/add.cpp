@@ -11,6 +11,8 @@
 //#define POSIT_TRACE_ADD
 
 // minimum set of include files to reflect source code dependencies
+//#define POSIT_VERBOSE_OUTPUT
+#define POSIT_TRACE_ADD
 #include <posit>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
@@ -33,16 +35,36 @@ void GenerateTestCase(Ty a, Ty b) {
 	std::cout << std::setprecision(5);
 }
 
+template<size_t nbits, size_t es>
+void GenerateTestLine(const sw::unum::posit<nbits, es>& a, const sw::unum::posit<nbits, es>& b) {
+	constexpr size_t rbits = nbits - es + 2;  // size of the unrounded addition result
+	sw::unum::posit<nbits, es> sum = a + b;
+	sw::unum::value<rbits> result = sw::unum::quire_add(a, b);
+	sw::unum::bitblock<rbits> raw = result.fraction();
+	sw::unum::bitblock<rbits> significant;
+	significant.set(rbits - 1, true); // the hidden bit articulated
+	for (int i = rbits - 1; i > 0; --i) {
+		significant.set(i - 1, raw[i]);
+	}
+	std::stringstream ss;
+	ss << "( '1', "										// valid
+		<< (result.isnan() ? "'1', " : "'0', ")			// isNaR
+		<< (result.iszero() ? "'1', " : "'0', ")		// isZero
+		<< (result.isneg() ? "'1', " : "'0', ")			// sign
+		<< "\"" << sw::unum::to_binary_<5>(result.scale()) << "\", "		// scale is +1 due to using significant
+		<< "\"" << significant << "\")";
+	std::cout << "( \"" << a.get() << "\", \"" << b.get() << "\", " << ss.str() << ", \"" << sum.get() << "\" )," << std::endl;
+}
+
 template<size_t nbits, size_t es> 
-void GenerateAdderTestbenchTable() {
-	constexpr int NR_OF_POSITS = (int)1 << nbits;
+void GenerateAdderTestbenchTable(int start, int end) {
+	// constexpr int NR_OF_POSITS = (int)1 << nbits;
 	sw::unum::posit<nbits, es> a, b, sum;
-	for (int i = 0; i < NR_OF_POSITS; ++i) {
+	for (int i = start; i < end; ++i) {
 		a.set_raw_bits(i);
-		for (int j = 0; j < NR_OF_POSITS; ++j) {
+		for (int j = start; j < end; ++j) {
 			b.set_raw_bits(j);
-			sum = a + b;
-			std::cout << "( \"" << a.get() << "\", \"" << b.get() << "\", \"" << sw::unum::quire_add(a, b).fraction() << "\", \"" << sum.get() << "\" )" << std::endl;
+			GenerateTestLine(a, b);
 		}
 	}
 }
@@ -71,7 +93,11 @@ try {
 //	GenerateValidationTestSet<5, 1>("addition");
 //	GenerateValidationTestSet<5, 2>("addition");
 
-	GenerateAdderTestbenchTable<7, 2>();
+	// posit<8,0> has 256 values: 1 is at 128
+	GenerateAdderTestbenchTable<8, 0>(0, 16);
+	GenerateAdderTestbenchTable<8, 0>(56, 71);
+	//GenerateAdderTestbenchTable<8, 0>(120, 135);
+	//GenerateAdderTestbenchTable<8, 0>(128 + 56, 128 + 71);
 
 #else
 

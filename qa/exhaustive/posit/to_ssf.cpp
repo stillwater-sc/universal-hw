@@ -59,7 +59,7 @@ void GenerateTestPatternTable(std::ostream& ostr) {
 	sw::unum::fraction<fbits> f;
 	for (int i = 0; i < NR_OF_POSITS; ++i) {
 		a.set_raw_bits(i);
-		_scale = sw::unum::convert_to_bitblock<5,int>(sw::unum::scale(a));
+		_scale = sw::unum::convert_to_bitblock<sbits,int>(sw::unum::scale(a));
 		decode(a.get(), s, r, e, f);
 		ostr << "( \"" << a.get() << "\", ("
 			<< (a.isnar() ? "'1', " : "'0', ")
@@ -85,8 +85,24 @@ try {
 
 #if MANUAL_TESTING
 
+	//  posit<  8,0> useed scale     1     minpos scale         -6     maxpos scale          6
+	//  posit<  8,1> useed scale     2     minpos scale        -12     maxpos scale         12
+	//  posit<  8,2> useed scale     4     minpos scale        -24     maxpos scale         24
+	cout << dynamic_range(posit<8, 0>()) << endl;
+	cout << dynamic_range(posit<8, 1>()) << endl;
+	cout << dynamic_range(posit<8, 2>()) << endl;
+	//	posit< 16, 0> useed scale     1     minpos scale - 14     maxpos scale         14
+	//	posit< 16, 1> useed scale     2     minpos scale - 28     maxpos scale         28
+	//	posit< 16, 2> useed scale     4     minpos scale - 56     maxpos scale         56
+	cout << dynamic_range(posit<16, 0>()) << endl;
+	cout << dynamic_range(posit<16, 1>()) << endl;
+	cout << dynamic_range(posit<16, 2>()) << endl;
 
-	GenerateTestPatternTable<8,0,5,5>(cout);
+	//GenerateTestPatternTable<8, 0, 5, 5>(cout);
+	//GenerateTestPatternTable<8, 1, 6, 4>(cout);
+	//GenerateTestPatternTable<8, 2, 7, 3>(cout);
+
+	//GenerateTestPatternTable<16, 1, 7, 12>(cout);
 
 #else
 

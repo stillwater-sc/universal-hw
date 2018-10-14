@@ -1,4 +1,4 @@
-// arithmetic_multiply.cpp: functional tests for multiplication
+// multiply.cpp: functional tests for multiplication
 //
 // Copyright (C) 2017-2018 Stillwater Supercomputing, Inc.
 //
@@ -15,36 +15,44 @@
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 
-// generate specific test case that you can trace with the trace conditions in posit.h
+// generate specific test case that you can trace with the trace conditions in posit.hpp
 // for most bugs they are traceable with _trace_conversion and _trace_mul
-template<size_t nbits, size_t es, typename Ty>
-void GenerateTestCase(Ty a, Ty b) {
-	Ty ref;
-	sw::unum::posit<nbits, es> pa, pb, pref, pmul;
-	pa = a;
-	pb = b;
-	ref = a * b;
-	pref = ref;
-	pmul = pa * pb;
-	std::cout << std::setprecision(nbits - 2);
-	std::cout << std::setw(nbits) << a << " * " << std::setw(nbits) << b << " = " << std::setw(nbits) << ref << std::endl;
-	std::cout << pa.get() << " * " << pb.get() << " = " << pmul.get() << " (reference: " << pref.get() << ")   ";
-	std::cout << (pref == pmul ? "PASS" : "FAIL") << std::endl << std::endl;
-	std::cout << std::setprecision(5);
-}
 
 template<size_t nbits, size_t es>
-void GenerateTestCase( sw::unum::posit<nbits,es> pa, sw::unum::posit<nbits,es> pb, sw::unum::posit<nbits, es> pref) {
-	double a = double(pa);
-	double b = double(pb);
-	double ref = a * b;
-	//sw::unum::posit<nbits, es> pref = ref;
-	sw::unum::posit<nbits, es> pmul = pa * pb;
-	std::cout << std::setprecision(nbits - 2);
-	std::cout << std::setw(nbits) << a << " * " << std::setw(nbits) << b << " = " << std::setw(nbits) << ref << std::endl;
-	std::cout << pa.get() << " * " << pb.get() << " = " << pmul.get() << " (reference: " << pref.get() << ")   ";
-	std::cout << (pref == pmul ? "PASS" : "FAIL") << std::endl << std::endl;
-	std::cout << std::setprecision(5);
+void GenerateMultiplierValidationLine(const sw::unum::posit<nbits, es>& a, const sw::unum::posit<nbits, es>& b) {
+	constexpr size_t mbits = sw::unum::posit<nbits, es>::mbits;  // size of the unrounded multiplication result
+	sw::unum::posit<nbits, es> product = a * b;
+	sw::unum::value<mbits> result = sw::unum::quire_mul(a, b);
+	sw::unum::bitblock<mbits> raw = result.fraction();
+	sw::unum::bitblock<mbits> significant;
+	if (!result.iszero() && !result.isinf()) {
+		significant.set(mbits - 1, true); // the hidden bit articulated
+		for (int i = mbits - 1; i > 0; --i) {
+			significant.set(i - 1, raw[i]);
+		}
+	}
+	std::stringstream ss;
+	ss << "( '1', "										// valid
+		<< (result.isinf() ? "'1', " : "'0', ")			// isNaR
+		<< (result.iszero() ? "'1', " : "'0', ")		// isZero
+		<< (result.isneg() ? "'1', " : "'0', ")			// sign
+		<< "\"" << sw::unum::to_binary_<5>(result.scale()) << "\", "		// scale is +1 due to using significant
+		<< "\"" << significant << "\")";
+	std::cout << "( \"" << a.get() << "\", \"" << b.get() << "\", " << ss.str() << ", \"" << product.get() << "\" )," << std::endl;
+}
+
+// generate a test set for sanity testing the hardware design
+template<size_t nbits, size_t es>
+void GenerateMultiplierTestbenchTable(int start, int end) {
+	// constexpr int NR_OF_POSITS = (int)1 << nbits;
+	sw::unum::posit<nbits, es> a, b, sum;
+	for (int i = start; i < end; ++i) {
+		a.set_raw_bits(i);
+		for (int j = start; j < end; ++j) {
+			b.set_raw_bits(j);
+			GenerateMultiplierValidationLine(a, b);
+		}
+	}
 }
 
 /*
@@ -89,12 +97,12 @@ void DifficultRoundingCases() {
 		a.set_raw_bits(cases[i]);
 		b.set_raw_bits(cases[i + 1]);
 		pref.set_raw_bits(cases[i + 3]);
-		//cout << a.get() << " * " << b.get() << " = " << pref.get() << endl;
-		GenerateTestCase(a, b, pref);
+		std::cout << a.get() << " * " << b.get() << " = " << pref.get() << '\n';
+		//GenerateTestCase(a, b, pref);
 	}
 }
 
-#define MANUAL_TESTING 0
+#define MANUAL_TESTING 1
 #define STRESS_TESTING 0
 
 int main(int argc, char** argv)
@@ -107,30 +115,28 @@ try {
 
 	cout << "Posit multiplication validation test generation" << endl;
 
-	std::string tag = "Multiplication failed: ";
+	std::string tag = "Multiplication Validation: ";
 
 #if MANUAL_TESTING
 	// generate individual testcases to hand trace/debug
-
-	/*
-	float fa, fb;
-	fa = 0.0f; fb = INFINITY;
-	std::cout << fa << " " << fb << std::endl;
-	GenerateTestCase<4,0, float>(fa, fb);
-	GenerateTestCase<16, 1, float>(float(minpos_value<16, 1>()), float(maxpos_value<16, 1>()));
-	*/
-
-	DifficultRoundingCases();
 	
+	posit<8, 0> a, b;
 
-	nrOfFailedTestCases += ReportTestResult(ValidateMultiplication<2, 0>("Manual Testing: ", bReportIndividualTestCases), "posit<2,0>", "multiplication");
-	nrOfFailedTestCases += ReportTestResult(ValidateMultiplication<3, 0>("Manual Testing: ", bReportIndividualTestCases), "posit<3,0>", "multiplication");
-	nrOfFailedTestCases += ReportTestResult(ValidateMultiplication<3, 1>("Manual Testing: ", bReportIndividualTestCases), "posit<3,1>", "multiplication");
-	nrOfFailedTestCases += ReportTestResult(ValidateMultiplication<4, 0>("Manual Testing: ", bReportIndividualTestCases), "posit<4,0>", "multiplication");
+	a.set_raw_bits(0x00);
+	b.set_raw_bits(0x80);
+	GenerateMultiplierValidationLine(a, b);
+
+	a.set_raw_bits(0x41);
+	b.set_raw_bits(0xC0);
+	for (int i = 0; i < 8; ++i) {
+		GenerateMultiplierValidationLine(a, b++);
+	}
+
+	GenerateMultiplierTestbenchTable<8, 0>(0, 8);
 
 #else
 
-
+	GenerateMultiplierTestbenchTable<8, 0>(0, 256);
 
 #if STRESS_TESTING
 

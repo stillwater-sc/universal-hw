@@ -1,6 +1,6 @@
 // smoke_sub.cpp: generate smoke tests for subtraction
 //
-// Copyright (C) 2017 Stillwater Supercomputing, Inc.
+// Copyright (C) 2017-2020 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
@@ -8,7 +8,7 @@
 #include <chrono>
 #include <ctime>
 
-#include <posit>
+#include <universal/posit/posit>
 #include "../../posit_test_helpers.hpp"
 #include "qa_helpers.hpp"
 

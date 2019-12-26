@@ -1,6 +1,6 @@
 project (posit-qa)
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
 
 option(UNIVERSAL_CMAKE_TRACE "Tracing CMake results, i.e. printing variable settings." OFF)
 option(UNIVERSAL_ENABLE_TESTS "Enable the build and run of tests." ON)
@@ -26,13 +26,13 @@ if (UNIVERSAL_ENABLE_TESTS)
     # include(Dart)
 endif()
 
-# Set posit include directory
-find_package(UNUM REQUIRED)
-include_directories(${UNUM_INCLUDE_DIRS})
-message(STATUS "UNUM INCLUDE DIR " ${UNUM_INCLUDE_DIRS})
+# Set universal numbers library include directory
+find_package(UNIVERSAL REQUIRED)
+include_directories(${UNIVERSAL_INCLUDE_DIRS})
+message(STATUS "UNIVERSAL INCLUDE DIR " ${UNINVERSAL_INCLUDE_DIRS})
 
-# enforce at least C++11 compatibility
-add_compile_options ( -std=c++11 )
+# enforce at least C++14 compatibility
+add_compile_options ( -std=c++14 )
 
 macro (compile_all testing prefix)
     # cycle through the sources
@@ -58,3 +58,4 @@ add_subdirectory("qa/smoke/posit")
 add_subdirectory("qa/smoke/valid")
 add_subdirectory("tools/cmd")
 add_subdirectory("examples/playground")
+add_subdirectory("tests/posit")

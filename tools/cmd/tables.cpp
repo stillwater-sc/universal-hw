@@ -1,10 +1,10 @@
 // tables.cpp: create detailed component tables that spell out all the components that make up a posit
 //
-// Copyright (C) 2017 Stillwater Supercomputing, Inc.
+// Copyright (C) 2017-2020 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
-#include "common.hpp"
+#include <universal/posit/posit>
 
 /*
   Posit values are a combination of 

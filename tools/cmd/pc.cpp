@@ -1,12 +1,12 @@
 // pc.cpp: posit components: show the sign/scale/regime/exponent/fraction components of standard posit configurations
 //
-// Copyright (C) 2017-2018 Stillwater Supercomputing, Inc.
+// Copyright (C) 2017-2020 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
 #include "common.hpp"
 
-#include <posit>
+#include <universal/posit/posit>
 
 typedef std::numeric_limits< double > dbl;
 const char* msg = "posit< 8, 0> = s1 r1111111 e f qNW v-64\n\

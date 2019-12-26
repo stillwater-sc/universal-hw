@@ -1,6 +1,6 @@
-// add.cpp: functional tests for addition
+// add.cpp: exhaustive functional tests for addition
 //
-// Copyright (C) 2017-2018 Stillwater Supercomputing, Inc.
+// Copyright (C) 2017-2020 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
@@ -11,7 +11,7 @@
 #define POSIT_TRACE_ADD
 
 // minimum set of include files to reflect source code dependencies
-#include <posit>
+#include <universal/posit/posit>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 

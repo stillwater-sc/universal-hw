@@ -1,12 +1,13 @@
 // numeric_limits.cpp: show the numeric limits of the compiler environment
 //
-// Copyright (C) 2017-2018 Stillwater Supercomputing, Inc.
+// Copyright (C) 2017-2020 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
 #include "common.hpp"
 
-#include <value>
+#include <universal/bitblock/bitblock.hpp>
+#include <universal/posit/value.hpp>
 
 using namespace std;
 using namespace sw::unum;

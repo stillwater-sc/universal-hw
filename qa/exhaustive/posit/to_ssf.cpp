@@ -11,7 +11,7 @@
 //#define POSIT_TRACE_ADD
 
 // minimum set of include files to reflect source code dependencies
-#include <posit>
+#include <universal/posit/posit>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 

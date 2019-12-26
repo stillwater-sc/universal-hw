@@ -1,6 +1,6 @@
-// arithmetic_subtract.cpp: functional tests for subtraction
+// subtract.cpp: exhaustive functional tests for subtraction
 //
-// Copyright (C) 2017-2018 Stillwater Supercomputing, Inc.
+// Copyright (C) 2017-2020 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 #include "common.hpp"
@@ -10,7 +10,7 @@
 #define POSIT_TRACE_SUB
 
 // minimum set of include files to reflect source code dependencies
-#include <posit>
+#include <universal/posit/posit>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 

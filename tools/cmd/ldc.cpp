@@ -1,12 +1,13 @@
 // ldc.cpp: long double components: show the sign/scale/fraction components of a long double (128b quad precision float)
 //
-// Copyright (C) 2017-2018 Stillwater Supercomputing, Inc.
+// Copyright (C) 2017-2020 Stillwater Supercomputing, Inc.
 //
 // This file is part of the universal numbers project, which is released under an MIT Open Source license.
 
 #include "common.hpp"
 
-#include <value>
+#include <universal/bitblock/bitblock.hpp>
+#include <universal/posit/value.hpp>
 
 // receive a float and print the components of a long double representation
 int main(int argc, char** argv)

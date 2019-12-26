@@ -1,0 +1,7 @@
+# vsim -c work.add_tb 
+# Start time: 17:59:02 on Mar 22,2018
+# ** Error (suppressible): (vsim-19) Failed to access library 'work' at "work".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 17:59:02 on Mar 22,2018, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0

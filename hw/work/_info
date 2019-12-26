@@ -1,0 +1,326 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/17.1
+Eadd_tb
+Z0 w1522536881
+Z1 DPx4 ieee 16 std_logic_textio 0 22 V5TSK`;aJKC<l]CEg1>mz1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dC:/Users/tomtz/Documents/dev/posit-qa/hw
+Z5 8C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/add_tb.vhdl
+Z6 FC:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/add_tb.vhdl
+l0
+L6
+V>TQLJ[YUJ>CzbXQYRG9e23
+!s100 nhR[7U2^Gd_[VDBBFh@CQ0
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1522538457
+!i10b 1
+Z9 !s108 1522538457.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/add_tb.vhdl|
+Z11 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/add_tb.vhdl|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Abehavior
+Z14 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z15 DEx4 work 3 dut 0 22 olUEZ_]WEmTJ5=m79XPSH2
+Z16 DEx4 work 18 test_vector_reader 0 22 LGM><lToEJl;d_VIU611g3
+R1
+R2
+R3
+DEx4 work 6 add_tb 0 22 >TQLJ[YUJ>CzbXQYRG9e23
+l29
+L9
+V3<c5I`Yk^3`cIJ22NkgmM1
+!s100 ^z1R>O<<O88oXcd@X8NIF1
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Eadder_tb
+Z17 w1522507088
+R4
+Z18 8C:/Users/tomtz/Documents/dev/posit-qa/hw/adder_tb.vhdl
+Z19 FC:/Users/tomtz/Documents/dev/posit-qa/hw/adder_tb.vhdl
+l0
+L2
+VkP?HinR[5IIAHK]9^<lT;0
+!s100 d:Lz_K3K@bn7Y]7]eHnh;2
+R7
+32
+R8
+!i10b 1
+R9
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/adder_tb.vhdl|
+Z21 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/adder_tb.vhdl|
+!i113 1
+R12
+R13
+Abehavior
+Z22 DEx4 work 10 full_adder 0 22 WlMHiG6nNgS^4l6EY7KUI0
+DEx4 work 8 adder_tb 0 22 kP?HinR[5IIAHK]9^<lT;0
+l18
+L5
+Vi5[e1IS_:g8^d^AP^lO_E2
+!s100 BT:40knTU3=7OU@mQ`EN]3
+R7
+32
+R8
+!i10b 1
+R9
+R20
+R21
+!i113 1
+R12
+R13
+Edut
+Z23 w1521754765
+R14
+R2
+R3
+R4
+Z24 8C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/dut.vhdl
+Z25 FC:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/dut.vhdl
+l0
+L5
+VolUEZ_]WEmTJ5=m79XPSH2
+!s100 j984ZKfCYzV732Vjn]ndc2
+R7
+32
+R8
+!i10b 1
+R9
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/dut.vhdl|
+Z27 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/dut.vhdl|
+!i113 1
+R12
+R13
+Abehavior
+R14
+R2
+R3
+R15
+l14
+L13
+V`oC5@f<fl2PYoP2HoofVP0
+!s100 7Zo@;<@6:89DMb4PHG7ac3
+R7
+32
+R8
+!i10b 1
+R9
+R26
+R27
+!i113 1
+R12
+R13
+Efull_adder
+Z28 w1522505707
+R4
+Z29 8C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/full_adder.vhdl
+Z30 FC:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/full_adder.vhdl
+l0
+L3
+VWlMHiG6nNgS^4l6EY7KUI0
+!s100 <=A@IK?4=DRI6aMCTn?k[2
+R7
+32
+R8
+!i10b 1
+R9
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/full_adder.vhdl|
+Z32 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/full_adder.vhdl|
+!i113 1
+R12
+R13
+Artl
+R22
+l10
+L9
+V3nfLFKRU`6kJWP;ZQjGJ23
+!s100 I>I8RS_@RHK7nVSmKaP1k1
+R7
+32
+R8
+!i10b 1
+R9
+R31
+R32
+!i113 1
+R12
+R13
+Ehello_world
+Z33 w1522504304
+R2
+R4
+Z34 8C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/hello_world.vhdl
+Z35 FC:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/hello_world.vhdl
+l0
+L5
+VLVAzk`][=DV<E^Ql9LFO:3
+!s100 fiEcJiHzK4bOo3D58X:d70
+R7
+32
+R8
+!i10b 1
+R9
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/hello_world.vhdl|
+Z37 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/hello_world.vhdl|
+!i113 1
+R12
+R13
+Abehaviour
+R2
+DEx4 work 11 hello_world 0 22 LVAzk`][=DV<E^Ql9LFO:3
+l9
+L8
+VRi36CHlW2VJ0F7UR?i<`@2
+!s100 TF5zkngPbV2oSLdShX2kY2
+R7
+32
+R8
+!i10b 1
+R9
+R36
+R37
+!i113 1
+R12
+R13
+Etest_vector
+Z38 w1522536643
+R1
+R2
+R3
+R4
+Z39 8C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector.vhdl
+Z40 FC:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector.vhdl
+l0
+L6
+V6[BNIfWSieC7cC`aY6N^P1
+!s100 EP2XkZAz7XV1dA<>^[3gk0
+R7
+32
+R8
+!i10b 1
+R9
+Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector.vhdl|
+Z42 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector.vhdl|
+!i113 1
+R12
+R13
+Abehavior
+R1
+R2
+R3
+DEx4 work 11 test_vector 0 22 6[BNIfWSieC7cC`aY6N^P1
+l20
+L14
+V6K[Tko@5<F3]>;Lc[C_][0
+!s100 GkU6WncjmKeWUOTi7PI071
+R7
+32
+R8
+!i10b 1
+R9
+R41
+R42
+!i113 1
+R12
+R13
+Etest_vector_reader
+Z43 w1522538447
+R1
+R2
+R3
+R4
+Z44 8C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector_reader.vhdl
+Z45 FC:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector_reader.vhdl
+l0
+L6
+VLGM><lToEJl;d_VIU611g3
+!s100 IG4D3ig4N3aHQJ4<RfdU>1
+R7
+32
+Z46 !s110 1522538458
+!i10b 1
+Z47 !s108 1522538458.000000
+Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector_reader.vhdl|
+Z49 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/test_vector_reader.vhdl|
+!i113 1
+R12
+R13
+Abehavior
+R1
+R2
+R3
+R16
+l18
+L14
+Z50 VaIIX>^YJdVlR_6<FDEz0U1
+Z51 !s100 1QK78Xj9=3f8ITO@`dZLB3
+R7
+32
+R46
+!i10b 1
+R47
+R48
+R49
+!i113 1
+R12
+R13
+Etext_io
+Z52 w1521570229
+R1
+R2
+R3
+R4
+Z53 8C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/vnv_testbench.vhdl
+Z54 FC:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/vnv_testbench.vhdl
+l0
+L6
+V7iY0JQMb83;G^>^3Q:MI:1
+!s100 kNKDCA2M>=XDIJOaCLW0Z2
+R7
+32
+Z55 !s110 1521570242
+!i10b 1
+Z56 !s108 1521570242.000000
+Z57 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/vnv_testbench.vhdl|
+Z58 !s107 C:/Users/tomtz/Documents/dev/posit-qa/hw/vhdl/vnv_testbench.vhdl|
+!i113 1
+R12
+R13
+Atb
+R1
+R2
+R3
+DEx4 work 7 text_io 0 22 7iY0JQMb83;G^>^3Q:MI:1
+l10
+L9
+VE9SfbA6<b:lZO1YKOf;@U1
+!s100 olbmN5<YlOJLlcMkVWHQG1
+R7
+32
+R55
+!i10b 1
+R56
+R57
+R58
+!i113 1
+R12
+R13

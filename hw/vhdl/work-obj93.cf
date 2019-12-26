@@ -1,0 +1,4 @@
+v 4
+file . ".\test_vector_reader.vhdl" "79c58307f4d05dca9acf81d38f5ea9d3daf696ba" "20180530225226.345":
+  entity test_vector_reader at 1( 0) + 0 on 11;
+  architecture behavior of test_vector_reader at 14( 373) + 0 on 12;

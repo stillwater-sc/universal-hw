@@ -15,8 +15,16 @@ set_property(CACHE COMPUTE_BACKEND_TYPE PROPERTY STRINGS
   "xsmm"
   )
 
-# Include universal library
-include_directories("${PROJECT_SOURCE_DIR}/external/universal/include")
+# Set universal numbers library include directory
+set(UNIVERSAL_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/external/universal/include" CACHE STRING
+      "Universal include directory" FORCE)
+#find_package(UNIVERSAL REQUIRED)
+include_directories(${UNIVERSAL_INCLUDE_DIRS})
+message(STATUS "UNIVERSAL INCLUDE DIR " ${UNINVERSAL_INCLUDE_DIRS})
+message(STATUS "UNIVERSAL INCLUDE DIR " "${PROJECT_SOURCE_DIR}/external/universal/include")
+
+# enforce at least C++20 compatibility
+#add_compile_options ( -std=c++17 )
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -117,6 +125,7 @@ message("EXE linker flags (release+debug)...: ${CMAKE_EXE_LINKER_FLAGS_RELWITHDE
 message("")
 message("------------- Options -------------")
 message("COMPUTE_BACKEND_TYPE...............: ${COMPUTE_BACKEND_TYPE}")
+message("UNIVERSAL_INCLUDE_DIR..............: ${UNINVERSAL_INCLUDE_DIRS}")
 
 message("")
 message("COMPUTE_WITH_MPI...................: ${COMPUTE_WITH_MPI}")

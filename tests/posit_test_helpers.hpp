@@ -13,7 +13,7 @@
 #include <limits>
 
 namespace sw {
-	namespace unum {
+	namespace universal {
 
 		static constexpr unsigned FLOAT_TABLE_WIDTH = 15;
 
@@ -420,7 +420,7 @@ namespace sw {
 			double da;
 			for (size_t i = 1; i < NR_TEST_CASES; i++) {
 				pa.set_raw_bits(i);
-				psqrt = sw::unum::sqrt(pa);
+				psqrt = sqrt(pa);
 				// generate reference
 				da = double(pa);
 				pref = std::sqrt(da);

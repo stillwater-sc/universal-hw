@@ -1,3 +1,3 @@
 file (GLOB SOURCES "./*.cpp")
 
-compile_all("true" "valid" "${SOURCES}")
+compile_all("true" "valid" "Randoms/Number Systems/floating-point/tapered/valid" "${SOURCES}")

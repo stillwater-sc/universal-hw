@@ -8,7 +8,7 @@
 #include <chrono>
 #include <ctime>
 
-#include <universal/posit/posit>
+#include <universal/number/valid/valid>
 #include "../../posit_test_helpers.hpp"
 #include "qa_helpers.hpp"
 

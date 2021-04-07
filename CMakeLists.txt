@@ -7,9 +7,9 @@ include (cmake/banners.cmake)
 print_header ()
 
 ########################################################################
-# Force CMake version 3.11 or above
+# Force CMake version 3.18 or above
 ########################################################################
-cmake_minimum_required (VERSION 3.11)
+cmake_minimum_required (VERSION 3.18)
 
 ########################################################################
 # Set RPATH on MacOSX
@@ -47,6 +47,31 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
 endif()
 
 ########################################################################
+# automatic test conversion
+########################################################################
+macro (compile_all testing prefix folder)
+    # cycle through the sources
+    # For the according directories, we assume that each cpp file is a separate test
+    # so, create a executable target and an associated test target
+    foreach (source ${ARGN})
+        get_filename_component (test ${source} NAME_WE)
+        string(REPLACE " " ";" new_source ${source})
+        set(test_name ${prefix}_${test})
+        #message(STATUS "Add test ${test_name} from source ${new_source}.")
+        add_executable (${test_name} ${new_source})
+
+        #add_custom_target(valid SOURCES ${SOURCES})
+        set_target_properties(${test_name} PROPERTIES FOLDER ${folder})
+        if (${testing} STREQUAL "true")
+            if (UNIVERSAL_CMAKE_TRACE)
+                message(STATUS "testing: ${test_name} ${RUNTIME_OUTPUT_DIRECTORY}/${test_name}")
+            endif()
+            add_test(${test_name} ${RUNTIME_OUTPUT_DIRECTORY}/${test_name})
+        endif()
+    endforeach (source)
+endmacro (compile_all)
+
+########################################################################
 # Project name
 ########################################################################
 project(universal_hwqa CXX)
@@ -58,6 +83,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 include(Config)
 
 ########################################################################
-# Build tests
+# Construct all the test suites and application programs
 ########################################################################
-#add_subdirectory(tests)
+add_subdirectory("qa/exhaustive/posit")
+add_subdirectory("qa/smoke/posit")
+add_subdirectory("qa/smoke/valid")
+add_subdirectory("examples/playground")
+add_subdirectory("tests/posit")

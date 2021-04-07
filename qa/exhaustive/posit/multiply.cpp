@@ -11,7 +11,7 @@
 #define POSIT_TRACE_MUL
 
 // minimum set of include files to reflect source code dependencies
-#include <universal/posit/posit>
+#include <universal/number/posit/posit>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 
@@ -19,12 +19,13 @@
 // for most bugs they are traceable with _trace_conversion and _trace_mul
 
 template<size_t nbits, size_t es>
-void GenerateMultiplierValidationLine(const sw::unum::posit<nbits, es>& a, const sw::unum::posit<nbits, es>& b) {
-	constexpr size_t mbits = sw::unum::posit<nbits, es>::mbits;  // size of the unrounded multiplication result
-	sw::unum::posit<nbits, es> product = a * b;
-	sw::unum::value<mbits> result = sw::unum::quire_mul(a, b);
-	sw::unum::bitblock<mbits> raw = result.fraction();
-	sw::unum::bitblock<mbits> significant;
+void GenerateMultiplierValidationLine(const sw::universal::posit<nbits, es>& a, const sw::universal::posit<nbits, es>& b) {
+	using namespace sw::universal;
+	constexpr size_t mbits = posit<nbits, es>::mbits;  // size of the unrounded multiplication result
+	posit<nbits, es> product = a * b;
+	internal::value<mbits> result = quire_mul(a, b);
+	internal::bitblock<mbits> raw = result.fraction();
+	internal::bitblock<mbits> significant;
 	if (!result.iszero() && !result.isinf()) {
 		significant.set(mbits - 1, true); // the hidden bit articulated
 		for (int i = mbits - 1; i > 0; --i) {
@@ -36,7 +37,7 @@ void GenerateMultiplierValidationLine(const sw::unum::posit<nbits, es>& a, const
 		<< (result.isinf() ? "'1', " : "'0', ")			// isNaR
 		<< (result.iszero() ? "'1', " : "'0', ")		// isZero
 		<< (result.isneg() ? "'1', " : "'0', ")			// sign
-		<< "\"" << sw::unum::to_binary_<5>(result.scale()) << "\", "		// scale is +1 due to using significant
+//		<< "\"" << to_binary_<5>(result.scale()) << "\", "		// scale is +1 due to using significant
 		<< "\"" << significant << "\")";
 	std::cout << "( \"" << a.get() << "\", \"" << b.get() << "\", " << ss.str() << ", \"" << product.get() << "\" )," << std::endl;
 }
@@ -45,7 +46,7 @@ void GenerateMultiplierValidationLine(const sw::unum::posit<nbits, es>& a, const
 template<size_t nbits, size_t es>
 void GenerateMultiplierTestbenchTable(int start, int end) {
 	// constexpr int NR_OF_POSITS = (int)1 << nbits;
-	sw::unum::posit<nbits, es> a, b, sum;
+	sw::universal::posit<nbits, es> a, b, sum;
 	for (int i = start; i < end; ++i) {
 		a.set_raw_bits(i);
 		for (int j = start; j < end; ++j) {
@@ -74,7 +75,7 @@ b61e2f1f fffffffe 00000002 00000003
 fffffffe b61e2f1f 00000002 00000003
 */
 void DifficultRoundingCases() {
-	sw::unum::posit<32, 2> a, b, bad, pref;
+	sw::universal::posit<32, 2> a, b, bad, pref;
 	std::vector<uint32_t> cases = {
 		0x00000002, 0x93ff6977, 0xfffffffa, 0xfffffff9,
 		0x00000002, 0xb61e2f1f, 0xfffffffe, 0xfffffffd,
@@ -108,7 +109,7 @@ void DifficultRoundingCases() {
 int main(int argc, char** argv)
 try {
 	using namespace std;
-	using namespace sw::unum;
+	using namespace sw::universal;
 
 	bool bReportIndividualTestCases = true;
 	int nrOfFailedTestCases = 0;

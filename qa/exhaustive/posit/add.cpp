@@ -11,7 +11,7 @@
 #define POSIT_TRACE_ADD
 
 // minimum set of include files to reflect source code dependencies
-#include <universal/posit/posit>
+#include <universal/number/posit/posit>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 
@@ -19,12 +19,13 @@
 // for most bugs they are traceable with _trace_conversion and _trace_add
 
 template<size_t nbits, size_t es>
-void GenerateAdderValidationLine(const sw::unum::posit<nbits, es>& a, const sw::unum::posit<nbits, es>& b) {
+void GenerateAdderValidationLine(const sw::universal::posit<nbits, es>& a, const sw::universal::posit<nbits, es>& b) {
 	constexpr size_t rbits = nbits - es + 2;  // size of the unrounded addition result
-	sw::unum::posit<nbits, es> sum = a + b;
-	sw::unum::value<rbits> result = sw::unum::quire_add(a, b);
-	sw::unum::bitblock<rbits> raw = result.fraction();
-	sw::unum::bitblock<rbits> significant;
+	using namespace sw::universal;
+	posit<nbits, es> sum = a + b;
+	internal::value<rbits> result = quire_add(a, b);
+	bitblock<rbits> raw = result.fraction();
+	bitblock<rbits> significant;
 	if (!result.iszero() && !result.isinf()) {
 		significant.set(rbits - 1, true); // the hidden bit articulated
 		for (int i = rbits - 1; i > 0; --i) {
@@ -36,7 +37,7 @@ void GenerateAdderValidationLine(const sw::unum::posit<nbits, es>& a, const sw::
 		<< (result.isinf() ? "'1', " : "'0', ")			// isNaR
 		<< (result.iszero() ? "'1', " : "'0', ")		// isZero
 		<< (result.isneg() ? "'1', " : "'0', ")			// sign
-		<< "\"" << sw::unum::to_binary_<5>(result.scale()) << "\", "		// scale is +1 due to using significant
+//		<< "\"" << to_binary<5>(result.scale()) << "\", "		// scale is +1 due to using significant
 		<< "\"" << significant << "\")";
 	std::cout << "( \"" << a.get() << "\", \"" << b.get() << "\", " << ss.str() << ", \"" << sum.get() << "\" )," << std::endl;
 }
@@ -45,7 +46,7 @@ void GenerateAdderValidationLine(const sw::unum::posit<nbits, es>& a, const sw::
 template<size_t nbits, size_t es> 
 void GenerateAdderTestbenchTable(int start, int end) {
 	// constexpr int NR_OF_POSITS = (int)1 << nbits;
-	sw::unum::posit<nbits, es> a, b, sum;
+	sw::universal::posit<nbits, es> a, b, sum;
 	for (int i = start; i < end; ++i) {
 		a.set_raw_bits(i);
 		for (int j = start; j < end; ++j) {
@@ -61,6 +62,7 @@ void GenerateAdderTestbenchTable(int start, int end) {
 int main(int argc, char** argv)
 try {
 	using namespace std;
+	using namespace sw::universal;
 	using namespace sw::qa;
 
 	bool bReportIndividualTestCases = false;
@@ -91,7 +93,7 @@ try {
 	}
 
 	cout << "normalization and behavior of uncertainty bit (LSB in the normalized number)\n";
-	value<5> v;
+	internal::value<5> v;
 	v.set(sign(a), scale(a), extract_fraction<8,0,5>(a), false, false, false);
 	for (int i = -5; i < 3; ++i) {
 		cout << "normalize by " << setw(2) << i << " : " << v.template nshift<9>(i) << endl;

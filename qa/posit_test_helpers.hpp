@@ -17,7 +17,7 @@
 namespace sw {
 
 	namespace qa {
-		using namespace unum;
+		using namespace universal;
 		static constexpr unsigned FLOAT_TABLE_WIDTH = 15;
 
 		template<size_t nbits, size_t es>
@@ -402,7 +402,7 @@ namespace sw {
 			double da;
 			for (int i = 1; i < NR_TEST_CASES; i++) {
 				pa.set_raw_bits(i);
-				psqrt = sw::unum::sqrt(pa);
+				psqrt = sw::universal::sqrt(pa);
 				// generate reference
 				da = double(pa);
 				pref = std::sqrt(da);
@@ -496,35 +496,6 @@ namespace sw {
 				int nrOfFailedTests = 0;
 				const size_t NR_POSITS = (unsigned(1) << nbits);
 
-				posit<nbits, es> pa, pb, pmul, pref;
-				double da, db;
-				for (int i = 0; i < NR_POSITS; i++) {
-					pa.set_raw_bits(i);
-					da = double(pa);
-					preference = 1.0 / da;
-				}
-				preciprocal = pa.reciprocate();
-
-				if (preciprocal != preference) {
-					nrOfFailedTests++;
-					if (bReportIndividualTestCases)	ReportUnaryArithmeticError("FAIL", "reciprocate", pa, preference, preciprocal);
-				}
-				else {
-					GenerateUnaryArithmeticTestCase("reciprocate", pa, preciprocal);
-					for (int j = 0; j < NR_POSITS; j++) {
-						pb.set_raw_bits(j);
-						db = double(pb);
-						pmul = pa * pb;
-						pref = da * db;
-						if (pmul != pref) {
-							if (bReportIndividualTestCases) ReportBinaryArithmeticError("FAIL", "*", pa, pb, pref, pmul);
-							nrOfFailedTests++;
-						}
-						else {
-							GenerateBinaryArithmeticTestCase("*", pa, pb, pmul);
-						}
-					}
-				}
 				return nrOfFailedTests;
 			}
 
@@ -553,7 +524,7 @@ namespace sw {
 						if (bReportIndividualTestCases)	ReportUnaryArithmeticError("FAIL", "reciprocate", pa, preference, preciprocal);
 					}
 					else {
-						GenerateBinaryArithmeticTestCase("reciprocate", pa, pb, preciprocal);
+						GenerateUnaryArithmeticTestCase("reciprocate", pa, preciprocal);
 					}
 				}
 				return nrOfFailedTests;

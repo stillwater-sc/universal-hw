@@ -9,7 +9,7 @@
 #define POSIT_VERBOSE_OUTPUT
 #define POSIT_TRACE_ALL
 
-#include <universal/posit/posit>
+#include <universal/number/posit/posit>
 #include "../../posit_test_helpers.hpp"
 #include "qa_helpers.hpp"
 
@@ -23,6 +23,7 @@ and show all the intermediate pipeline processing details.
 int main(int argc, char** argv)
 try {
 	using namespace std;
+	using namespace sw::universal;
 
 	cout << "Generating smoke test details" << endl;
 
@@ -41,8 +42,9 @@ try {
 
 #ifdef WIN32
 	char full_path[1024];
-	_getcwd(full_path, 1024);
-	cout << "CWD: " << full_path << endl;
+	char* pStr = _getcwd(full_path, 1024);
+	if (pStr != 0) 
+		cout << "CWD: " << full_path << endl;
 #endif
 
 	ifstream testFile;
@@ -67,7 +69,7 @@ try {
 			}
 			// for the moment only posit<32,2>
 			size_t Idx = 0;
-			sw::unum::posit<32, 2> pa, pb, pref;
+			posit<32, 2> pa, pb, pref;
 			uint64_t va = stoull(op1, &Idx, 2);
 			uint64_t vb = stoull(op2, &Idx, 2);
 			uint64_t vref = stoull(ref, &Idx, 2);
@@ -78,7 +80,7 @@ try {
 			pref.set_raw_bits(vref);
 			cout << pa << " " << op << " " << pb << " = " << pref << endl;
 
-			sw::unum::posit<32, 2> presult;
+			posit<32, 2> presult;
 			if (op == "+") {
 				presult = pa + pb;
 			} 
@@ -91,7 +93,7 @@ try {
 			else if (op == "/") {
 				presult = pa / pb;
 			}
-			cout << sw::unum::components(presult) << endl;
+			cout << components(presult) << endl;
 			cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
 			cout << endl;
 		}

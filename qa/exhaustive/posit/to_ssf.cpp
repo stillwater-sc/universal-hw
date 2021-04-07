@@ -11,7 +11,7 @@
 //#define POSIT_TRACE_ADD
 
 // minimum set of include files to reflect source code dependencies
-#include <universal/posit/posit>
+#include <universal/number/posit/posit>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 
@@ -20,7 +20,7 @@
 template<size_t nbits, size_t es, typename Ty>
 void GenerateTestCase(Ty a, Ty b) {
 	Ty ref;
-	sw::unum::posit<nbits, es> pa, pb, pref, psum;
+	sw::universal::posit<nbits, es> pa, pb, pref, psum;
 	pa = a;
 	pb = b;
 	ref = a + b;
@@ -50,23 +50,24 @@ constant test_patterns : pattern_array := (
 */
 template<size_t nbits, size_t es, size_t sbits, size_t fbits> 
 void GenerateTestPatternTable(std::ostream& ostr) {
+	using namespace sw::universal;
 	constexpr size_t NR_OF_POSITS = (size_t(1) << nbits);
-	sw::unum::bitblock<sbits> _scale;
-	sw::unum::posit<nbits, es> a;
+	bitblock<sbits> _scale;
+	posit<nbits, es> a;
 	bool s;
-	sw::unum::regime<nbits, es> r;
-	sw::unum::exponent<nbits, es> e;
-	sw::unum::fraction<fbits> f;
+	regime<nbits, es> r;
+	exponent<nbits, es> e;
+	fraction<fbits> f;
 	for (int i = 0; i < NR_OF_POSITS; ++i) {
 		a.set_raw_bits(i);
-		_scale = sw::unum::convert_to_bitblock<sbits,int>(sw::unum::scale(a));
+		_scale = convert_to_bitblock<sbits,int>(scale(a));
 		decode(a.get(), s, r, e, f);
 		ostr << "( \"" << a.get() << "\", ("
 			<< (a.isnar() ? "'1', " : "'0', ")
 			<< (a.iszero() ? "'1', " : "'0', ")
 			<< (s ? "'1', " : "'0', ")
-			<< "\"" << sw::unum::to_bit_string(_scale, false) << "\", "
-			<< "\"" << sw::unum::to_bit_string(f.get(), false) << "\") ),\n";
+			<< "\"" << to_bit_string(_scale, false) << "\", "
+			<< "\"" << to_bit_string(f.get(), false) << "\") ),\n";
 	}
 }
 
@@ -76,6 +77,7 @@ void GenerateTestPatternTable(std::ostream& ostr) {
 int main(int argc, char** argv)
 try {
 	using namespace std;
+	using namespace sw::universal;
 	using namespace sw::qa;
 
 	bool bReportIndividualTestCases = false;

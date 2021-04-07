@@ -1,61 +1,63 @@
-project (posit-qa)
+########################################################################
+# CMakeLists.txt
+#
+# Authors: Matthias Moller, Theodore Omtzigt
+########################################################################
+include (cmake/banners.cmake)
+print_header ()
 
-cmake_minimum_required(VERSION 3.5)
+########################################################################
+# Force CMake version 3.11 or above
+########################################################################
+cmake_minimum_required (VERSION 3.11)
 
-option(UNIVERSAL_CMAKE_TRACE "Tracing CMake results, i.e. printing variable settings." OFF)
-option(UNIVERSAL_ENABLE_TESTS "Enable the build and run of tests." ON)
-option(UNIVERSAL_VERBOSE_TESTS "Always print test output, otherwise only errors. Only relevant when tests enabled." OFF)
-
-macro(trace_variable variable)
-    if (UNIVERSAL_CMAKE_TRACE)
-        message(STATUS "${variable} = ${${variable}}")
-    endif()
-endmacro()
-        
-
-# TODO: Check whether this is needed for old CMake versions
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake") 
-trace_variable(CMAKE_MODULE_PATH)
-
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake") 
-trace_variable(CMAKE_PREFIX_PATH)
-
-# Must be located in root dir, doesn't work in tests
-if (UNIVERSAL_ENABLE_TESTS)
-    enable_testing()
-    # include(Dart)
+########################################################################
+# Set RPATH on MacOSX
+########################################################################
+if (APPLE)
+  set(CMAKE_MACOSX_RPATH ON)
+  SET(CMAKE_SKIP_BUILD_RPATH FALSE)
+  SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+  SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+  SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+  LIST(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
+  IF ("${isSystemDir}" STREQUAL "-1")
+    SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+  ENDIF ()
 endif()
 
-# Set universal numbers library include directory
-find_package(UNIVERSAL REQUIRED)
-include_directories(${UNIVERSAL_INCLUDE_DIRS})
-message(STATUS "UNIVERSAL INCLUDE DIR " ${UNINVERSAL_INCLUDE_DIRS})
+########################################################################
+# Use solution folders for Visual Studio
+########################################################################
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# enforce at least C++14 compatibility
-add_compile_options ( -std=c++14 )
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  # Set default build type to RelWithDebInfo
+  set(CMAKE_BUILD_TYPE Release CACHE STRING
+    "Type of build (None Debug Release RelWithDebInfo MinSizeRel)" FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
+    "RelWithDebInfo" "MinSizeRel")
+endif()
 
-macro (compile_all testing prefix)
-    # cycle through the sources
-    # For the according directories, we assume that each cpp file is a separate test
-    # so, create a executable target and an associated test target
-    foreach (source ${ARGN})
-        get_filename_component (test ${source} NAME_WE)
-        string(REPLACE " " ";" new_source ${source})
-        set(test_name ${prefix}_${test})
-        # message(STATUS "Add test ${test_name} from source ${new_source}.")
-        add_executable (${test_name} ${new_source})
-        if (${testing} STREQUAL "true")
-            if (UNIVERSAL_CMAKE_TRACE)
-                message(STATUS "testing: ${test_name} ${RUNTIME_OUTPUT_DIRECTORY}/${test_name}")
-            endif()
-            add_test(${test_name} ${RUNTIME_OUTPUT_DIRECTORY}/${test_name})
-        endif()
-    endforeach (source)
-endmacro (compile_all)
+########################################################################
+# We do not support in-source build
+########################################################################
+if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
+  message(FATAL_ERROR "In-source builds are not permitted.\nPlease make a separate folder for building, otherwise type \nmake\nthat will create a ./build folder and will compile in that folder. Cmake has created garbage files/dirs (you may manually remove them):\nCMakeCache.txt CMakeFiles")
+endif()
 
-add_subdirectory("qa/exhaustive/posit")
-add_subdirectory("qa/smoke/posit")
-add_subdirectory("qa/smoke/valid")
-add_subdirectory("tools/cmd")
-add_subdirectory("examples/playground")
-add_subdirectory("tests/posit")
+########################################################################
+# Project name
+########################################################################
+project(universal_hwqa CXX)
+enable_testing()
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
+
+# Global configuration
+include(Config)
+
+########################################################################
+# Build tests
+########################################################################
+#add_subdirectory(tests)

@@ -1,0 +1,3 @@
+[submodule "external/universal"]
+	path = external/universal
+	url = https://github.com/stillwater-sc/universal

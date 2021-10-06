@@ -1,2 +1,2 @@
-# universal-hw-qa
-QA test suites for universal arithmetic hardware designs
+# universal-hw
+Universal arithmetic hardware designs and QA test suites

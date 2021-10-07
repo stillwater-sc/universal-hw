@@ -48,16 +48,16 @@ namespace sw {
 			// minpos + minpos = minpos
 			using namespace sw::universal;
 			TestCase<nbits, es> test;
-			test.a = posit<nbits, es>(minpos_value<nbits, es>());
-			test.b = posit<nbits, es>(minpos_value<nbits, es>());
+			test.a = posit<nbits, es>(sw::universal::SpecificValue::minpos);
+			test.b = test.a;
 			test_cases.push_back(test);
 			// all the cases that enumerate the state space of the exponent bits
 			for (int i = 0; i < int(1) << (es + 2); i++) {
 				test.a++; test.b++;
 				test_cases.push_back(test);
 			}
-			test.a = posit<nbits, es>(maxpos_value<nbits, es>());
-			test.b = posit<nbits, es>(maxpos_value<nbits, es>());
+			test.a = posit<nbits, es>(sw::universal::SpecificValue::maxpos);
+			test.b = test.a;
 			test_cases.push_back(test);
 			for (int i = 0; i < int(1) << (es + 2); i++) {
 				test.a--; test.b--;

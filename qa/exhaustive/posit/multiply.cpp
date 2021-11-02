@@ -11,7 +11,7 @@
 #define POSIT_TRACE_MUL
 
 // minimum set of include files to reflect source code dependencies
-#include <universal/number/posit/posit>
+#include <universal/number/posit/posit.hpp>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 
@@ -48,9 +48,9 @@ void GenerateMultiplierTestbenchTable(int start, int end) {
 	// constexpr int NR_OF_POSITS = (int)1 << nbits;
 	sw::universal::posit<nbits, es> a, b, sum;
 	for (int i = start; i < end; ++i) {
-		a.set_raw_bits(i);
+		a.setbits(i);
 		for (int j = start; j < end; ++j) {
-			b.set_raw_bits(j);
+			b.setbits(j);
 			GenerateMultiplierValidationLine(a, b);
 		}
 	}
@@ -95,9 +95,9 @@ void DifficultRoundingCases() {
 	unsigned nrOfTests = (unsigned)cases.size() / 4;
 	
 	for (unsigned i = 0; i < cases.size(); i+= 4) {
-		a.set_raw_bits(cases[i]);
-		b.set_raw_bits(cases[i + 1]);
-		pref.set_raw_bits(cases[i + 3]);
+		a.setbits(cases[i]);
+		b.setbits(cases[i + 1]);
+		pref.setbits(cases[i + 3]);
 		std::cout << a.get() << " * " << b.get() << " = " << pref.get() << '\n';
 		//GenerateTestCase(a, b, pref);
 	}
@@ -123,12 +123,12 @@ try {
 	
 	posit<8, 0> a, b;
 
-	a.set_raw_bits(0x00);
-	b.set_raw_bits(0x80);
+	a.setbits(0x00);
+	b.setbits(0x80);
 	GenerateMultiplierValidationLine(a, b);
 
-	a.set_raw_bits(0x41);
-	b.set_raw_bits(0xC0);
+	a.setbits(0x41);
+	b.setbits(0xC0);
 	for (int i = 0; i < 8; ++i) {
 		GenerateMultiplierValidationLine(a, b++);
 	}

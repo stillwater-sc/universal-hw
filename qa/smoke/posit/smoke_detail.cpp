@@ -9,7 +9,7 @@
 #define POSIT_VERBOSE_OUTPUT
 #define POSIT_TRACE_ALL
 
-#include <universal/number/posit/posit>
+#include <universal/number/posit/posit.hpp>
 #include "../../posit_test_helpers.hpp"
 #include "qa_helpers.hpp"
 
@@ -75,9 +75,9 @@ try {
 			uint64_t vref = stoull(ref, &Idx, 2);
 			cout << endl;
 
-			pa.set_raw_bits(va);
-			pb.set_raw_bits(vb);
-			pref.set_raw_bits(vref);
+			pa.setbits(va);
+			pb.setbits(vb);
+			pref.setbits(vref);
 			cout << pa << " " << op << " " << pb << " = " << pref << endl;
 
 			posit<32, 2> presult;

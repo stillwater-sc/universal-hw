@@ -10,7 +10,7 @@
 #define POSIT_TRACE_SUB
 
 // minimum set of include files to reflect source code dependencies
-#include <universal/number/posit/posit>
+#include <universal/number/posit/posit.hpp>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 

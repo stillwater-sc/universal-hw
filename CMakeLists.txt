@@ -74,7 +74,7 @@ endmacro (compile_all)
 ########################################################################
 # Project name
 ########################################################################
-project(universal_hwqa CXX)
+project(universalhw CXX)
 enable_testing()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")

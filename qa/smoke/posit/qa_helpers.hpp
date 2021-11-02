@@ -48,16 +48,16 @@ namespace sw {
 			// minpos + minpos = minpos
 			using namespace sw::universal;
 			TestCase<nbits, es> test;
-			test.a = posit<nbits, es>(minpos_value<nbits, es>());
-			test.b = posit<nbits, es>(minpos_value<nbits, es>());
+			test.a = posit<nbits, es>(sw::universal::SpecificValue::minpos);
+			test.b = test.a;
 			test_cases.push_back(test);
 			// all the cases that enumerate the state space of the exponent bits
 			for (int i = 0; i < int(1) << (es + 2); i++) {
 				test.a++; test.b++;
 				test_cases.push_back(test);
 			}
-			test.a = posit<nbits, es>(maxpos_value<nbits, es>());
-			test.b = posit<nbits, es>(maxpos_value<nbits, es>());
+			test.a = posit<nbits, es>(sw::universal::SpecificValue::maxpos);
+			test.b = test.a;
 			test_cases.push_back(test);
 			for (int i = 0; i < int(1) << (es + 2); i++) {
 				test.a--; test.b--;
@@ -116,15 +116,15 @@ namespace sw {
 			// minpos + minpos = minpos?
 			using namespace sw::universal;
 			TestCase<nbits, es> test;
-			test.a = posit<nbits, es>(minpos_value<nbits, es>());
-			test.b = posit<nbits, es>(minpos_value<nbits, es>());
+			test.a = posit<nbits, es>(SpecificValue::minpos);
+			test.b = posit<nbits, es>(SpecificValue::minpos);
 			test_cases.push_back(test);
 			for (int i = 0; i < int(1) << (es + 2); i++) {
 				test.a++; test.b++;
 				test_cases.push_back(test);
 			}
-			test.a = posit<nbits, es>(maxpos_value<nbits, es>());
-			test.b = posit<nbits, es>(maxpos_value<nbits, es>());
+			test.a = posit<nbits, es>(SpecificValue::maxpos);
+			test.b = posit<nbits, es>(SpecificValue::maxpos);
 			test_cases.push_back(test);
 			for (int i = 0; i < int(1) << (es + 2); i++) {
 				test.a--; test.b--;
@@ -185,14 +185,14 @@ namespace sw {
 			// minpos * maxpos = 1.0
 			using namespace sw::universal;
 			TestCase<nbits, es> test;
-			test.a = posit<nbits, es>(minpos_value<nbits, es>());
-			test.b = posit<nbits, es>(minpos_value<nbits, es>());
+			test.a = posit<nbits, es>(sw::universal::SpecificValue::minpos);
+			test.b = test.a;
 			test_cases.push_back(test);
-			test.b = posit<nbits, es>(maxpos_value<nbits, es>());
+			test.b = posit<nbits, es>(sw::universal::SpecificValue::maxpos);
 			test_cases.push_back(test);
-			test.a = posit<nbits, es>(maxpos_value<nbits, es>());
+			test.a = posit<nbits, es>(sw::universal::SpecificValue::maxpos);
 			test_cases.push_back(test);
-			test.a = posit<nbits, es>(minpos_value<nbits, es>());
+			test.a = posit<nbits, es>(sw::universal::SpecificValue::minpos);
 			for (int i = 0; i < int(1) << (es + 2); i++) {
 				test.a++; test.b--;
 				test_cases.push_back(test);
@@ -245,15 +245,15 @@ namespace sw {
 			// minpos + minpos = minpos?
 			using namespace sw::universal;
 			TestCase<nbits, es> test;
-			test.a = posit<nbits, es>(minpos_value<nbits, es>());
-			test.b = posit<nbits, es>(minpos_value<nbits, es>());
+			test.a = posit<nbits, es>(SpecificValue::minpos);
+			test.b = posit<nbits, es>(SpecificValue::minpos);
 			test_cases.push_back(test);
 			for (int i = 0; i < int(1) << (es + 1); i++) {
 				test.a++; test.b++;
 				test_cases.push_back(test);
 			}
-			test.a = posit<nbits, es>(maxpos_value<nbits, es>());
-			test.b = posit<nbits, es>(maxpos_value<nbits, es>());
+			test.a = posit<nbits, es>(SpecificValue::maxpos);
+			test.b = posit<nbits, es>(SpecificValue::maxpos);
 			test_cases.push_back(test);
 			for (int i = 0; i < int(1) << (es + 1); i++) {
 				test.a--; test.b--;
@@ -397,13 +397,13 @@ namespace sw {
 			std::cout << "posit<" << nbits << "," << es << ">" << std::endl;
 
 			int nrOfFailedTests = 0;
-			double minpos = minpos_value<nbits + 1, es>();
+			double minpos = double(posit<nbits + 1, es>(SpecificValue::minpos));
 			double eps;
 			double da, input;
 			posit<nbits, es> pa;
 			for (int64_t index = 0; index < NR_TEST_CASES; index++) {
 				unsigned long long i = test_patterns[index];
-				pref.set_raw_bits(i);
+				pref.setbits(i);
 				std::cout << "Test case [" << index << "] = " << i << " b" << pref.get() << "  >>>>>>>>>>>>>>>  Reference Seed value: " << pref << std::endl;
 
 				da = double(pref);
@@ -419,7 +419,7 @@ namespace sw {
 						// even the -delta goes to +minpos
 						input = da - eps;
 						pa = input;
-						pnext.set_raw_bits(i + 1);
+						pnext.setbits(i + 1);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pnext, bReportIndividualTestCases);
 						input = da + eps;
 						pa = input;
@@ -430,14 +430,14 @@ namespace sw {
 						// special case of projecting to +maxpos
 						input = da - eps;
 						pa = input;
-						pprev.set_raw_bits(HALF - 2);
+						pprev.setbits(HALF - 2);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pprev, bReportIndividualTestCases);
 					}
 					else if (i == HALF + 1) {
 						// special case of projecting to -maxpos
 						input = da - eps;
 						pa = input;
-						pprev.set_raw_bits(HALF + 2);
+						pprev.setbits(HALF + 2);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pprev, bReportIndividualTestCases);
 					}
 					else if (i == STATE_SPACE - 1) {
@@ -445,7 +445,7 @@ namespace sw {
 						// even the +delta goes to -minpos
 						input = da - eps;
 						pa = input;
-						pprev.set_raw_bits(i - 1);
+						pprev.setbits(i - 1);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pprev, bReportIndividualTestCases);
 						input = da + eps;
 						pa = input;
@@ -456,12 +456,12 @@ namespace sw {
 						// round-down
 						input = da - eps;
 						pa = input;
-						pprev.set_raw_bits(i - 1);
+						pprev.setbits(i - 1);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pprev, bReportIndividualTestCases);
 						// round-up
 						input = da + eps;
 						pa = input;
-						pnext.set_raw_bits(i + 1);
+						pnext.setbits(i + 1);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pnext, bReportIndividualTestCases);
 					}
 				}
@@ -471,14 +471,14 @@ namespace sw {
 						// special case of projecting to +minpos
 						input = da + eps;
 						pa = input;
-						pnext.set_raw_bits(i + 2);
+						pnext.setbits(i + 2);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pnext, bReportIndividualTestCases);
 					}
 					else if (i == STATE_SPACE - 2) {
 						// special case of projecting to -minpos
 						input = da - eps;
 						pa = input;
-						pprev.set_raw_bits(STATE_SPACE - 2);
+						pprev.setbits(STATE_SPACE - 2);
 						nrOfFailedTests += sw::qa::Compare(input, pa, (double)pprev, bReportIndividualTestCases);
 					}
 					else {
@@ -589,7 +589,7 @@ namespace sw {
 				operand_values[0] = (long double)presult;
 				presult = -1.0;
 				operand_values[1] = (long double)presult;
-				presult.set_raw_bits(1);
+				presult.setbits(1);
 				operand_values[2] = (long double)presult;
 				presult--; presult--;
 				operand_values[3] = (long double)presult;
@@ -600,7 +600,7 @@ namespace sw {
 				presult++;
 				operand_values[5] = (long double)presult;
 				for (uint32_t i = 6; i < SIZE_STATE_SPACE; i++) {
-					presult.set_raw_bits(uniform(eng));  // take the bottom nbits bits as posit encoding: works for nbits<=64
+					presult.setbits(uniform(eng));  // take the bottom nbits bits as posit encoding: works for nbits<=64
 					operand_values[i] = (long double)presult;
 				}
 
@@ -642,7 +642,7 @@ namespace sw {
 				operand_values[0] = (long double)presult;
 				presult = -1.0;
 				operand_values[1] = (long double)presult;
-				presult.set_raw_bits(1);
+				presult.setbits(1);
 				operand_values[2] = (long double)presult;
 				presult--; presult--;
 				operand_values[3] = (long double)presult;
@@ -653,7 +653,7 @@ namespace sw {
 				presult++;
 				operand_values[5] = (long double)presult;
 				for (uint32_t i = 6; i < SIZE_STATE_SPACE; i++) {
-					presult.set_raw_bits(uniform(eng));  // take the bottom nbits bits as posit encoding: works for nbits<=64
+					presult.setbits(uniform(eng));  // take the bottom nbits bits as posit encoding: works for nbits<=64
 					operand_values[i] = (long double)presult;
 				}
 

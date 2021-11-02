@@ -6,7 +6,7 @@
 
 #include "common.hpp"
 
-#include <universal/number/posit/posit>
+#include <universal/number/posit/posit.hpp>
 #include <universal/number/posit/table.hpp>
 
 /*

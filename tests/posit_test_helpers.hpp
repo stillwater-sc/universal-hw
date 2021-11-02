@@ -759,7 +759,7 @@ namespace sw {
 #else // USE DOUBLE
 			std::vector<double> operand_values(SIZE_STATE_SPACE);
 			for (uint32_t i = 0; i < SIZE_STATE_SPACE; i++) {
-				presult.set_raw_bits(distr(eng));  // take the bottom nbits bits as posit encoding
+				presult.setbits(distr(eng));  // take the bottom nbits bits as posit encoding
 				operand_values[i] = double(presult);
 			}
 			double da, db;

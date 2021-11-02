@@ -11,7 +11,7 @@
 #define POSIT_TRACE_ADD
 
 // minimum set of include files to reflect source code dependencies
-#include <universal/number/posit/posit>
+#include <universal/number/posit/posit.hpp>
 #include "../../test_helpers.hpp"
 #include "../../posit_test_helpers.hpp"
 
@@ -48,9 +48,9 @@ void GenerateAdderTestbenchTable(int start, int end) {
 	// constexpr int NR_OF_POSITS = (int)1 << nbits;
 	sw::universal::posit<nbits, es> a, b, sum;
 	for (int i = start; i < end; ++i) {
-		a.set_raw_bits(i);
+		a.setbits(i);
 		for (int j = start; j < end; ++j) {
-			b.set_raw_bits(j);
+			b.setbits(j);
 			GenerateAdderValidationLine(a, b);
 		}
 	}
@@ -76,18 +76,18 @@ try {
 	// generate individual testcases to hand trace/debug
 	posit<8, 0> a, b;
 
-	a.set_raw_bits(0x01);
-	b.set_raw_bits(0x70);
+	a.setbits(0x01);
+	b.setbits(0x70);
 	for (int i = 0; i < 8; ++i) {
 		GenerateAdderValidationLine(a, b++);
 	}
-	a.set_raw_bits(0x03);
-	b.set_raw_bits(0x70);
+	a.setbits(0x03);
+	b.setbits(0x70);
 	for (int i = 0; i < 8; ++i) {
 		GenerateAdderValidationLine(a, b++);
 	}
-	a.set_raw_bits(0x21);
-	b.set_raw_bits(0x70);
+	a.setbits(0x21);
+	b.setbits(0x70);
 	for (int i = 0; i < 8; ++i) {
 		GenerateAdderValidationLine(a, b++);
 	}

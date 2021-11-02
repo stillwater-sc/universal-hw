@@ -1,0 +1,9 @@
+Step 1: Create a 17-bit number of all 1s -> a
+Step 2: Find LOD of input 8-bit integer -> n(position of leading 1)
+Step 3: Left-Shift integer n times and then set MSB = 0.
+Step 4: Logical AND with LSB bits of a.
+Step 5: Left Shift a, n times.
+Step 6: Create a result_posit variable of 16 bits with MSB = 0 and all 1s.
+Step 7: Logical AND a[15:1] with result_posit[14:0].
+Step 8: We now have the converted posit.
+

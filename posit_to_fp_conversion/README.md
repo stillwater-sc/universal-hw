@@ -1,3 +1,14 @@
+
+__Architecture Overview__
+![Architecture Block Diagram](https://github.com/ARamachandran2000/universal-hw/blob/main/posit_to_fp_conversion/Register%20File.png)
+
+
+__Waveform Output__
+![Waveform](https://github.com/ARamachandran2000/universal-hw/blob/main/posit_to_fp_conversion/Waveform%20of%20Posit%20to%20FP.png)
+
+
+
+
 This folder contains a preliminary version of a POSIT ALU.
 
 Functionality Present : 

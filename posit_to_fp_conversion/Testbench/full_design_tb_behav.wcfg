@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="full_design_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="full_design_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="169200001fs"></ZoomEndTime>
+      <Cursor1Time time="85000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="260"></NameColumnWidth>
+      <ValueColumnWidth column_width="100"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="logic" fp_name="/full_design_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/full_design_tb/final_output">
+      <obj_property name="ElementShortName">final_output[31:0]</obj_property>
+      <obj_property name="ObjectShortName">final_output[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">FLOATINGPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">24</obj_property>
+      <obj_property name="radix_otherWidth">8</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/full_design_tb/output_valid">
+      <obj_property name="ElementShortName">output_valid</obj_property>
+      <obj_property name="ObjectShortName">output_valid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/full_design_tb/proc_done">
+      <obj_property name="ElementShortName">proc_done</obj_property>
+      <obj_property name="ObjectShortName">proc_done</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/full_design_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/full_design_tb/rout2">
+      <obj_property name="ElementShortName">rout2</obj_property>
+      <obj_property name="ObjectShortName">rout2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/full_design_tb/rvalid2">
+      <obj_property name="ElementShortName">rvalid2</obj_property>
+      <obj_property name="ObjectShortName">rvalid2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/full_design_tb/w_en">
+      <obj_property name="ElementShortName">w_en</obj_property>
+      <obj_property name="ObjectShortName">w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/full_design_tb/wa3">
+      <obj_property name="ElementShortName">wa3[4:0]</obj_property>
+      <obj_property name="ObjectShortName">wa3[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/full_design_tb/wd3">
+      <obj_property name="ElementShortName">wd3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">wd3[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/full_design_tb/dut/ra1">
+      <obj_property name="ElementShortName">ra1[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ra1[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/full_design_tb/dut/rd1">
+      <obj_property name="ElementShortName">rd1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rd1[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/full_design_tb/dut/r1/in_data">
+      <obj_property name="ElementShortName">in_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">in_data[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/full_design_tb/dut/r1/rvalid_in">
+      <obj_property name="ElementShortName">rvalid_in</obj_property>
+      <obj_property name="ObjectShortName">rvalid_in</obj_property>
+   </wvobject>
+</wave_config>

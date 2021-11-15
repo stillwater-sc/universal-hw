@@ -1,0 +1,13 @@
+register file
++--------+--------+--------+--------+--------+--------+--------+--------+
+ srrrrrrr 00000000 00000000 00000000 00000000 00000000 00000000 00000000      8-bit type
+ srrrrrrr eeffffff 00000000 00000000 00000000 00000000 00000000 00000000     16-bit type
+ srrrrrrr eeffffff ffffffff ffffffff 00000000 00000000 00000000 00000000     32-bit type
+ srrrrrrr eeffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff     64-bit type
+
+
+register file for standard posits: 
+posit< 8,2>
+posit<16,2>
+posit<32,2>
+posit<64,2>
